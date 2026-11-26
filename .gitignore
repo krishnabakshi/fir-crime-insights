@@ -44,3 +44,4 @@ docs/*.pdf
 Thumbs.db
 .vscode/
 .idea/
+!docs/KrishnaBakshi_24CSU297.pdf
