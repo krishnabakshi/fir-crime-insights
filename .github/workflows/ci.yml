@@ -38,6 +38,9 @@ jobs:
         run: |
           docker build -t fir-crime-insights .
           docker image ls fir-crime-insights
+          size_mb=$(( $(docker image inspect -f '{{.Size}}' fir-crime-insights) / 1000000 ))
+          echo "::notice title=Docker image size::fir-crime-insights image is ${size_mb} MB"
+          echo "Docker image size: ${size_mb} MB" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Smoke-test the container
         run: |
