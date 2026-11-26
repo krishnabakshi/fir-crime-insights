@@ -9,6 +9,9 @@ crime trends, hotspot maps, modus-operandi (MO) matching across FIRs, criminal-n
 records, case-progress tracking, short-term forecasts, and a deployed model that warns when a chargesheet is likely
 to miss the 90-day deadline.
 
+**Live demo:** https://fir-crime-insights.onrender.com (UI) · [/docs](https://fir-crime-insights.onrender.com/docs) · [/health](https://fir-crime-insights.onrender.com/health)
+(free Render instance: the first request after it has been idle can take about a minute to wake it up).
+
 CSL236 Introduction to AI & ML, B.Tech CSE Semester 5, The NorthCap University. **All data is synthetic.**
 
 ---
@@ -61,7 +64,9 @@ Example rows from `reports/insights_report.csv`:
 |---|---|
 | ![network](reports/figures/13_network.png) | ![delays](reports/figures/14_delay_and_conviction.png) |
 
-The green CI check and the live URL appear after the repository is pushed and deployed (see below).
+| Live deployment on Render | Green GitHub Actions run |
+|---|---|
+| ![live](docs/screenshots/live_ui.png) | ![ci](docs/screenshots/ci_green.png) |
 
 ## Problem statement
 
@@ -252,7 +257,9 @@ from the file panel or copy them to Drive if you want to keep them.
 
 ## Deployment and monitoring
 
-Free-tier deployment on Render (any host that runs a Docker container works):
+**Live URL:** https://fir-crime-insights.onrender.com (deployed from this repository's Dockerfile on Render's free tier).
+
+How it was deployed (any host that runs a Docker container works):
 1. Push the repository to GitHub.
 2. On <https://render.com>: *New > Web Service*, connect the repository, choose *Docker* as the runtime, free instance.
 3. Render sets `$PORT`; the Dockerfile already listens on it. Health check path: `/health`.
