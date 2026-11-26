@@ -1,0 +1,46 @@
+# --- Python / environments ---
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+
+# --- MLflow (mlflow.db MAY be committed so evaluators can see run history) ---
+mlruns/
+mlartifacts/
+
+# --- Secrets ---
+.env
+.env.*
+*.key
+*.pem
+credentials*.json
+secrets/
+
+# --- Real data must NEVER be committed. Only synthetic files go in the repo. ---
+data/real/
+data/raw/
+data/private/
+*.real.csv
+*.real.json
+
+# --- Restricted identity lookup tables and notebook models ---
+models/
+!models/.gitkeep
+
+# --- Runtime logs (sample log is kept for the evaluators) ---
+logs/*
+!logs/.gitkeep
+!logs/sample_predictions.jsonl
+
+# --- Course PDFs: remove these two lines if your instructor allows sharing ---
+docs/*.pdf
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

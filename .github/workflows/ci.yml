@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  train-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Regenerate the synthetic case register (must be reproducible)
+        run: |
+          python data/generate_fir_cases.py --out /tmp/fir_cases_check.csv
+          cmp data/fir_cases.csv /tmp/fir_cases_check.csv
+
+      - name: Train a baseline model (logged to MLflow)
+        run: python train.py --algorithm logreg --C 0.1 --force
+
+      - name: Run tests
+        run: pytest -v --tb=short
+
+      - name: Build the Docker image
+        run: |
+          docker build -t fir-crime-insights .
+          docker image ls fir-crime-insights
+
+      - name: Smoke-test the container
+        run: |
+          docker run -d -p 8000:8000 --name api fir-crime-insights
+          for i in $(seq 1 20); do curl -fs http://localhost:8000/health && break; sleep 2; done
+          curl -fs http://localhost:8000/health
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST http://localhost:8000/predict \
+                 -H "Content-Type: application/json" -d '{"crime_type":"Theft"}')
+          test "$code" = "422"
+          docker rm -f api

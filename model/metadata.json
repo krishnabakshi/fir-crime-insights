@@ -1,0 +1,90 @@
+{
+  "params": {
+    "algorithm": "logreg",
+    "C": 0.1
+  },
+  "metrics": {
+    "accuracy": 0.7243,
+    "precision": 0.5769,
+    "recall": 0.7192,
+    "f1": 0.6402,
+    "roc_auc": 0.7877,
+    "cv_f1_mean": 0.6178,
+    "train_seconds": 0.25
+  },
+  "features": [
+    "num_accused",
+    "num_witnesses",
+    "io_caseload",
+    "registration_delay_days",
+    "property_value_inr",
+    "has_cctv",
+    "has_cdr_evidence",
+    "has_financial_trail",
+    "forensic_required",
+    "repeat_offender_involved",
+    "offence_gravity",
+    "crime_type",
+    "police_station",
+    "season",
+    "time_of_day"
+  ],
+  "target": "chargesheet_delayed",
+  "trained_at": "2026-11-26T19:16:06",
+  "feature_importance": [
+    {
+      "feature": "io_caseload",
+      "importance": 0.0719
+    },
+    {
+      "feature": "crime_type",
+      "importance": 0.0362
+    },
+    {
+      "feature": "forensic_required",
+      "importance": 0.0266
+    },
+    {
+      "feature": "offence_gravity",
+      "importance": 0.0264
+    },
+    {
+      "feature": "police_station",
+      "importance": 0.0111
+    },
+    {
+      "feature": "has_cctv",
+      "importance": 0.0108
+    },
+    {
+      "feature": "has_financial_trail",
+      "importance": 0.0095
+    },
+    {
+      "feature": "num_accused",
+      "importance": 0.0048
+    }
+  ],
+  "training_stats": {
+    "num_accused": {
+      "mean": 1.6321031048623316,
+      "std": 0.9979347812263134
+    },
+    "num_witnesses": {
+      "mean": 2.377639751552795,
+      "std": 1.657496114387042
+    },
+    "io_caseload": {
+      "mean": 31.0,
+      "std": 11.859397843927145
+    },
+    "registration_delay_days": {
+      "mean": 1.809718969555035,
+      "std": 3.545433514806301
+    },
+    "property_value_inr": {
+      "mean": 59810.427968655815,
+      "std": 167159.4113038582
+    }
+  }
+}
