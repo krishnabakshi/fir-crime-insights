@@ -227,10 +227,10 @@ Response: `delay_probability`, `predicted_delayed`, `risk_band` (High / Medium /
 ```bash
 docker build -t fir-crime-insights .
 docker run -d -p 8000:8000 --restart unless-stopped fir-crime-insights
-docker image ls fir-crime-insights        # note the image size here: ______ MB
+docker image ls fir-crime-insights        # about 158 MB (measured in CI)
 ```
 
-The image installs only `requirements-serve.txt` and copies only `app.py`, `src/contract.py`,
+The image is **158 MB** (python:3.11-slim base; size printed by every CI run). It installs only `requirements-serve.txt` and copies only `app.py`, `src/contract.py`,
 `src/model_pipeline.py`, `model/` and `static/`.
 
 ## Using Google Colab
